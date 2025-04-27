@@ -122,7 +122,6 @@ public class DataProcessingService {
             calculated.setSourcePortNullRate(calculateRate(source.getSourcePortNullCount(), source.getReceivedDataCount()));
             calculated.setProtocolNullRate(calculateRate(source.getProtocolNullCount(), source.getReceivedDataCount()));
         }
-
         return calculated;
     }
 
