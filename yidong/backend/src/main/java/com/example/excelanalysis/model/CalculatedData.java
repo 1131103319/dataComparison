@@ -1,9 +1,9 @@
 package com.example.excelanalysis.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
 import java.time.LocalDate;
 
 @Data
@@ -52,7 +52,14 @@ public class CalculatedData {
     
     @Column(name = "source_port_null_rate")
     private Double sourcePortNullRate;  // 源端口空值率
-    
+    @Column(name= "protocal_null_rate")
+    private Double protocolNullRate;
+    public Double getProtocolNullRate(){
+        return protocolNullRate;
+    }
+    public void setProtocolNullRate(Double protocolNullRate){
+        this.protocolNullRate=protocolNullRate;
+    }
     // 手动添加getter和setter方法
     public Long getId() {
         return id;

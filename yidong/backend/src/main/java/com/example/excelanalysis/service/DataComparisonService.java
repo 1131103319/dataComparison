@@ -3,7 +3,6 @@ package com.example.excelanalysis.service;
 import com.example.excelanalysis.dto.DataStatisticsResponse;
 import com.example.excelanalysis.dto.ExcelDataDTO;
 import com.example.excelanalysis.model.CalculatedData;
-import com.example.excelanalysis.model.SourceData;
 import com.example.excelanalysis.repository.CalculatedDataRepository;
 import com.example.excelanalysis.repository.SourceDataRepository;
 import com.example.excelanalysis.util.ExcelUtil;
@@ -23,8 +22,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class DataComparisonService {
@@ -176,6 +177,7 @@ public class DataComparisonService {
             item.put("destPortNullRate", data.getDestPortNullRate());
             item.put("sourceIpNullRate", data.getSourceIpNullRate());
             item.put("sourcePortNullRate", data.getSourcePortNullRate());
+            item.put("protocolNullRate",data.getProtocolNullRate());
             formattedData.add(item);
         }
         

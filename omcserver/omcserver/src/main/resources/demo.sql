@@ -1,0 +1,19 @@
+create table omc_alert_information_tb(
+alarmTitle varchar(50),
+alarmStatus varchar(50),
+alarmType varchar(50),
+origSeverity varchar(50),
+eventTime datetime,
+alarmId int AUTO_INCREMENT PRIMARY KEY,
+specificProblemID varchar(50),
+specificProblem varchar(50),
+neUID varchar(50),
+neName varchar(50),
+neType varchar(50),
+objectUID varchar(50),
+objectName varchar(50),
+objectType varchar(50),
+locationInfo varchar(50),
+addInfo varchar(50),
+status boolean;
+);

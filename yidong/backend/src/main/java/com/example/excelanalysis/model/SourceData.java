@@ -46,7 +46,16 @@ public class SourceData {
     
     @Column(name = "source_port_null_count")
     private Long sourcePortNullCount; // 源端口空值数量
-    
+   @Column(name = "protocol_null_count")
+   private Long protocolNullCount;
+    public Long getProtocolNullCount() {
+        return protocolNullCount;
+    }
+
+    public void setProtocolNullCount(Long protocolNullCount) {
+        this.protocolNullCount = protocolNullCount;
+    }
+
     // 手动添加getter和setter方法
     public Long getIp() {
         return receivedDataCount;

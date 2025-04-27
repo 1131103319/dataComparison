@@ -7,16 +7,17 @@ public class DataStatisticsResponse {
     private String date;
     private String networkType;
     private List<String> businessTypes;
-    private Map<String, Integer> totalDataCounts;
-    private Map<String, Integer> receivedCounts;
-    private Map<String, Integer> totalFileCounts;
-    private Map<String, Integer> receivedFileCounts;
+    private Map<String, Long> totalDataCounts;
+    private Map<String, Long> receivedCounts;
+    private Map<String, Long> totalFileCounts;
+    private Map<String, Long> receivedFileCounts;
     private Map<String, Double> phoneNullRates;
     private Map<String, Double> domainNullRates;
     private Map<String, Double> destIpNullRates;
     private Map<String, Double> destPortNullRates;
     private Map<String, Double> sourceIpNullRates;
     private Map<String, Double> sourcePortNullRates;
+    private Map<String,Double> protocolNullRates;
     private Map<String, Object> responseMap;  // 新增字段，用于存储前端所需的格式化数据
 
 
@@ -51,35 +52,35 @@ public class DataStatisticsResponse {
         this.businessTypes = businessTypes;
     }
 
-    public Map<String, Integer> getTotalDataCounts() {
+    public Map<String, Long> getTotalDataCounts() {
         return totalDataCounts;
     }
 
-    public void setTotalDataCounts(Map<String, Integer> totalDataCounts) {
+    public void setTotalDataCounts(Map<String, Long> totalDataCounts) {
         this.totalDataCounts = totalDataCounts;
     }
 
-    public Map<String, Integer> getReceivedCounts() {
+    public Map<String, Long> getReceivedCounts() {
         return receivedCounts;
     }
 
-    public void setReceivedCounts(Map<String, Integer> receivedCounts) {
+    public void setReceivedCounts(Map<String, Long> receivedCounts) {
         this.receivedCounts = receivedCounts;
     }
 
-    public Map<String, Integer> getTotalFileCounts() {
+    public Map<String, Long> getTotalFileCounts() {
         return totalFileCounts;
     }
 
-    public void setTotalFileCounts(Map<String, Integer> totalFileCounts) {
+    public void setTotalFileCounts(Map<String, Long> totalFileCounts) {
         this.totalFileCounts = totalFileCounts;
     }
 
-    public Map<String, Integer> getReceivedFileCounts() {
+    public Map<String, Long> getReceivedFileCounts() {
         return receivedFileCounts;
     }
 
-    public void setReceivedFileCounts(Map<String, Integer> receivedFileCounts) {
+    public void setReceivedFileCounts(Map<String, Long> receivedFileCounts) {
         this.receivedFileCounts = receivedFileCounts;
     }
 
@@ -129,5 +130,12 @@ public class DataStatisticsResponse {
 
     public void setSourcePortNullRates(Map<String, Double> sourcePortNullRates) {
         this.sourcePortNullRates = sourcePortNullRates;
+    }
+    public Map<String, Double> getProtocolNullRates() {
+        return protocolNullRates;
+    }
+
+    public void setProtocolNullRates(Map<String, Double> protocolNullRates) {
+        this.protocolNullRates = protocolNullRates;
     }
 }
