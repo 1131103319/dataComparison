@@ -11,13 +11,13 @@ public class DataStatisticsResponse {
     private Map<String, Long> receivedCounts;
     private Map<String, Long> totalFileCounts;
     private Map<String, Long> receivedFileCounts;
-    private Map<String, Double> phoneNullRates;
-    private Map<String, Double> domainNullRates;
-    private Map<String, Double> destIpNullRates;
-    private Map<String, Double> destPortNullRates;
-    private Map<String, Double> sourceIpNullRates;
-    private Map<String, Double> sourcePortNullRates;
-    private Map<String,Double> protocolNullRates;
+    private Map<String, String> phoneNullRates;
+    private Map<String, String> domainNullRates;
+    private Map<String, String> destIpNullRates;
+    private Map<String, String> destPortNullRates;
+    private Map<String, String> sourceIpNullRates;
+    private Map<String, String> sourcePortNullRates;
+    private Map<String,String> protocolNullRates;
     private Map<String, Object> responseMap;  // 新增字段，用于存储前端所需的格式化数据
 
 
@@ -84,58 +84,58 @@ public class DataStatisticsResponse {
         this.receivedFileCounts = receivedFileCounts;
     }
 
-    public Map<String, Double> getPhoneNullRates() {
+    public Map<String, String> getPhoneNullRates() {
         return phoneNullRates;
     }
 
-    public void setPhoneNullRates(Map<String, Double> phoneNullRates) {
+    public void setPhoneNullRates(Map<String, String> phoneNullRates) {
         this.phoneNullRates = phoneNullRates;
     }
 
-    public Map<String, Double> getDomainNullRates() {
+    public Map<String, String> getDomainNullRates() {
         return domainNullRates;
     }
 
-    public void setDomainNullRates(Map<String, Double> domainNullRates) {
+    public void setDomainNullRates(Map<String, String> domainNullRates) {
         this.domainNullRates = domainNullRates;
     }
 
-    public Map<String, Double> getDestIpNullRates() {
+    public Map<String, String> getDestIpNullRates() {
         return destIpNullRates;
     }
 
-    public void setDestIpNullRates(Map<String, Double> destIpNullRates) {
+    public void setDestIpNullRates(Map<String, String> destIpNullRates) {
         this.destIpNullRates = destIpNullRates;
     }
 
-    public Map<String, Double> getDestPortNullRates() {
+    public Map<String, String> getDestPortNullRates() {
         return destPortNullRates;
     }
 
-    public void setDestPortNullRates(Map<String, Double> destPortNullRates) {
+    public void setDestPortNullRates(Map<String, String> destPortNullRates) {
         this.destPortNullRates = destPortNullRates;
     }
 
-    public Map<String, Double> getSourceIpNullRates() {
+    public Map<String, String> getSourceIpNullRates() {
         return sourceIpNullRates;
     }
 
-    public void setSourceIpNullRates(Map<String, Double> sourceIpNullRates) {
+    public void setSourceIpNullRates(Map<String, String> sourceIpNullRates) {
         this.sourceIpNullRates = sourceIpNullRates;
     }
 
-    public Map<String, Double> getSourcePortNullRates() {
+    public Map<String, String> getSourcePortNullRates() {
         return sourcePortNullRates;
     }
 
-    public void setSourcePortNullRates(Map<String, Double> sourcePortNullRates) {
+    public void setSourcePortNullRates(Map<String, String> sourcePortNullRates) {
         this.sourcePortNullRates = sourcePortNullRates;
     }
-    public Map<String, Double> getProtocolNullRates() {
+    public Map<String, String> getProtocolNullRates() {
         return protocolNullRates;
     }
 
-    public void setProtocolNullRates(Map<String, Double> protocolNullRates) {
+    public void setProtocolNullRates(Map<String, String> protocolNullRates) {
         this.protocolNullRates = protocolNullRates;
     }
 }

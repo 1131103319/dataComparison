@@ -280,7 +280,7 @@ public class DataComparisonService {
      */
     private String formatRate(String rate) {
         if (rate.equals( "-")) {
-            return "\\";
+            return "-";
         }
         return rate+"%";
     }
