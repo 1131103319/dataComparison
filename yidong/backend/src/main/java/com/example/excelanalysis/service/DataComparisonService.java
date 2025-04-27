@@ -278,10 +278,10 @@ public class DataComparisonService {
      * @param rate 比率
      * @return 格式化后的字符串
      */
-    private String formatRate(Double rate) {
-        if (rate == null) {
-            return "0.00%";
+    private String formatRate(String rate) {
+        if (rate.equals( "-")) {
+            return "\\";
         }
-        return String.format("%.2f%%", rate * 100);
+        return rate+"%";
     }
 }

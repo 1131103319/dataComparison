@@ -36,28 +36,28 @@ public class CalculatedData {
     private Long receivedFileCount;  // 接收文件总数
     
     @Column(name = "phone_null_rate")
-    private Double phoneNullRate;       // 用户号码空值率
+    private String phoneNullRate;       // 用户号码空值率
     
     @Column(name = "domain_null_rate")
-    private Double domainNullRate;      // 域名空值率
+    private String domainNullRate;      // 域名空值率
     
     @Column(name = "dest_ip_null_rate")
-    private Double destIpNullRate;      // 目的ip空值率
+    private String destIpNullRate;      // 目的ip空值率
     
     @Column(name = "dest_port_null_rate")
-    private Double destPortNullRate;    // 目的端口空值率
+    private String destPortNullRate;    // 目的端口空值率
     
     @Column(name = "source_ip_null_rate")
-    private Double sourceIpNullRate;    // 源公网ip空值率
+    private String sourceIpNullRate;    // 源公网ip空值率
     
     @Column(name = "source_port_null_rate")
-    private Double sourcePortNullRate;  // 源端口空值率
+    private String sourcePortNullRate;  // 源端口空值率
     @Column(name= "protocal_null_rate")
-    private Double protocolNullRate;
-    public Double getProtocolNullRate(){
+    private String protocolNullRate;
+    public String getProtocolNullRate(){
         return protocolNullRate;
     }
-    public void setProtocolNullRate(Double protocolNullRate){
+    public void setProtocolNullRate(String protocolNullRate){
         this.protocolNullRate=protocolNullRate;
     }
     // 手动添加getter和setter方法
@@ -125,51 +125,51 @@ public class CalculatedData {
         this.receivedFileCount = receivedFileCount;
     }
     
-    public Double getPhoneNullRate() {
+    public String getPhoneNullRate() {
         return phoneNullRate;
     }
     
-    public void setPhoneNullRate(Double phoneNullRate) {
+    public void setPhoneNullRate(String phoneNullRate) {
         this.phoneNullRate = phoneNullRate;
     }
     
-    public Double getDomainNullRate() {
+    public String getDomainNullRate() {
         return domainNullRate;
     }
     
-    public void setDomainNullRate(Double domainNullRate) {
+    public void setDomainNullRate(String domainNullRate) {
         this.domainNullRate = domainNullRate;
     }
     
-    public Double getDestIpNullRate() {
+    public String getDestIpNullRate() {
         return destIpNullRate;
     }
     
-    public void setDestIpNullRate(Double destIpNullRate) {
+    public void setDestIpNullRate(String destIpNullRate) {
         this.destIpNullRate = destIpNullRate;
     }
     
-    public Double getDestPortNullRate() {
+    public String getDestPortNullRate() {
         return destPortNullRate;
     }
     
-    public void setDestPortNullRate(Double destPortNullRate) {
+    public void setDestPortNullRate(String destPortNullRate) {
         this.destPortNullRate = destPortNullRate;
     }
     
-    public Double getSourceIpNullRate() {
+    public String getSourceIpNullRate() {
         return sourceIpNullRate;
     }
     
-    public void setSourceIpNullRate(Double sourceIpNullRate) {
+    public void setSourceIpNullRate(String sourceIpNullRate) {
         this.sourceIpNullRate = sourceIpNullRate;
     }
     
-    public Double getSourcePortNullRate() {
+    public String getSourcePortNullRate() {
         return sourcePortNullRate;
     }
     
-    public void setSourcePortNullRate(Double sourcePortNullRate) {
+    public void setSourcePortNullRate(String sourcePortNullRate) {
         this.sourcePortNullRate = sourcePortNullRate;
     }
 }
