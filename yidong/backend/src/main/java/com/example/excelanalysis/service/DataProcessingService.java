@@ -126,6 +126,6 @@ public class DataProcessingService {
     }
 
     private String calculateRate(Long nullCount, Long totalCount) {
-        return nullCount == null ? "-" : String.format("%.2f", (double)nullCount / totalCount*100);
+        return (nullCount == null|| nullCount== 0) ? "-" : String.format("%.2f", (double)nullCount / totalCount*100);
     }
 }

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS source_data (
     network_type VARCHAR(10) CHECK (network_type IN ('4G', '5G')),
     time DATE NOT NULL,
     received_data_count BIGINT,
-    received_file_count BIGIN,
+    received_file_count BIGINT,
     phone_null_count BIGINT,
     domain_null_count BIGINT,
     dest_ip_null_count BIGINT,

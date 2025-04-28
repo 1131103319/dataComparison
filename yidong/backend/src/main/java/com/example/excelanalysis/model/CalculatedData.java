@@ -52,7 +52,7 @@ public class CalculatedData {
     
     @Column(name = "source_port_null_rate")
     private String sourcePortNullRate;  // 源端口空值率
-    @Column(name= "protocal_null_rate")
+    @Column(name= "protocol_null_rate")
     private String protocolNullRate;
     public String getProtocolNullRate(){
         return protocolNullRate;
