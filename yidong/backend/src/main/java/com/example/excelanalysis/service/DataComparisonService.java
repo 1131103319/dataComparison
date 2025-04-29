@@ -171,6 +171,8 @@ public class DataComparisonService {
             item.put("receivedCount", data.getReceivedCount());
             item.put("totalFileCount", data.getTotalFileCount());
             item.put("receivedFileCount", data.getReceivedFileCount());
+            item.put("receivedRate", data.getReceivedRate());
+            item.put("inboundRate", data.getInboundRate());
             item.put("phoneNullRate", data.getPhoneNullRate());
             item.put("domainNullRate", data.getDomainNullRate());
             item.put("destIpNullRate", data.getDestIpNullRate());
@@ -230,9 +232,9 @@ public class DataComparisonService {
             Row headerRow = sheet.createRow(0);
             String[] headers = {
                 "业务类型", "网络类型", "日期", 
-                "入库数据量", "接收数据量", "入库文件量", "接收文件量",
-                "手机号空值率", "域名空值率", "目标IP空值率", 
-                "目标端口空值率", "源IP空值率", "源端口空值率"
+                "总数据量", "接收数据量", "总文件量", "接收文件量","接收率","入库率",
+                "手机号回填率", "域名回填率", "目标IP回填率",
+                "目标端口回填率", "源IP回填率", "源端口回填率","协议回填率"
             };
             
             for (int i = 0; i < headers.length; i++) {
@@ -251,13 +253,16 @@ public class DataComparisonService {
                 row.createCell(3).setCellValue(data.getTotalDataCount());
                 row.createCell(4).setCellValue(data.getReceivedCount());
                 row.createCell(5).setCellValue(data.getTotalFileCount());
-                row.createCell(6).setCellValue(data.getReceivedFileCount());
-                row.createCell(7).setCellValue(formatRate(data.getPhoneNullRate()));
-                row.createCell(8).setCellValue(formatRate(data.getDomainNullRate()));
-                row.createCell(9).setCellValue(formatRate(data.getDestIpNullRate()));
-                row.createCell(10).setCellValue(formatRate(data.getDestPortNullRate()));
-                row.createCell(11).setCellValue(formatRate(data.getSourceIpNullRate()));
-                row.createCell(12).setCellValue(formatRate(data.getSourcePortNullRate()));
+                row.createCell(6).setCellValue(data.getReceivedRate());
+                row.createCell(7).setCellValue(data.getInboundRate());
+                row.createCell(8).setCellValue(data.getReceivedFileCount());
+                row.createCell(9).setCellValue(formatRate(data.getPhoneNullRate()));
+                row.createCell(10).setCellValue(formatRate(data.getDomainNullRate()));
+                row.createCell(11).setCellValue(formatRate(data.getDestIpNullRate()));
+                row.createCell(12).setCellValue(formatRate(data.getDestPortNullRate()));
+                row.createCell(13).setCellValue(formatRate(data.getSourceIpNullRate()));
+                row.createCell(14).setCellValue(formatRate(data.getSourcePortNullRate()));
+                row.createCell(15).setCellValue(formatRate(data.getProtocolNullRate()));
             }
             
             // 写入字节数组

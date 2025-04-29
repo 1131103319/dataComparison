@@ -62,31 +62,44 @@ public class DataProcessingService {
         mergedData.setTime(firstData.getTime());
 
         // 累加所有数值字段
-        long receivedDataCount = 0L;
-        long receivedFileCount = 0L;
-        long phoneNullCount = 0L;
-        long domainNullCount = 0L;
-        long destIpNullCount = 0L;
-        long destPortNullCount = 0L;
-        long sourceIpNullCount = 0L;
-        long sourcePortNullCount = 0L;
-        long protocolNullCount = 0L;
+        Long receivedDataCount = 0L;
+        Long receivedFileCount = 0L;
+        Long totalFileCount = 0L;
+        Long phoneNullCount = 0L;
+        Long domainNullCount = 0L;
+        Long destIpNullCount = 0L;
+        Long destPortNullCount = 0L;
+        Long sourceIpNullCount = 0L;
+        Long sourcePortNullCount = 0L;
+        Long protocolNullCount = 0L;
 
         for (SourceData data : sourceDataList) {
-            receivedDataCount += data.getReceivedDataCount() != null ? data.getReceivedDataCount() : 0;
-            receivedFileCount += data.getReceivedFileCount() != null ? data.getReceivedFileCount() : 0;
-            phoneNullCount += data.getPhoneNullCount() != null ? data.getPhoneNullCount() : 0;
-            domainNullCount += data.getDomainNullCount() != null ? data.getDomainNullCount() : 0;
-            destIpNullCount += data.getDestIpNullCount() != null ? data.getDestIpNullCount() : 0;
-            destPortNullCount += data.getDestPortNullCount() != null ? data.getDestPortNullCount() : 0;
-            sourceIpNullCount += data.getSourceIpNullCount() != null ? data.getSourceIpNullCount() : 0;
-            sourcePortNullCount += data.getSourcePortNullCount() != null ? data.getSourcePortNullCount() : 0;
-            protocolNullCount += data.getProtocolNullCount() != null ? data.getProtocolNullCount() : 0;
+            if (data.getReceivedDataCount() != null) receivedDataCount += data.getReceivedDataCount();
+            else receivedDataCount = null;
+            if (data.getReceivedFileCount() != null) receivedFileCount += data.getReceivedFileCount();
+            else receivedFileCount = null;
+            if (data.getTotalFileCount() != null) totalFileCount += data.getTotalFileCount();
+            else totalFileCount = null;
+            if (data.getPhoneNullCount() != null) phoneNullCount += data.getPhoneNullCount();
+            else phoneNullCount = null;
+            if (data.getDomainNullCount() != null) domainNullCount += data.getDomainNullCount();
+            else domainNullCount = null;
+            if (data.getDestIpNullCount() != null) destIpNullCount += data.getDestIpNullCount();
+            else destIpNullCount = null;
+            if (data.getDestPortNullCount() != null) destPortNullCount += data.getDestPortNullCount();
+            else destPortNullCount = null;
+            if (data.getSourceIpNullCount() != null) sourceIpNullCount += data.getSourceIpNullCount();
+            else sourceIpNullCount = null;
+            if (data.getSourcePortNullCount() != null) sourcePortNullCount += data.getSourcePortNullCount();
+            else sourcePortNullCount = null;
+            if (data.getProtocolNullCount() != null) protocolNullCount += data.getProtocolNullCount();
+            else protocolNullCount = null;
         }
 
         // 设置合并后的值
         mergedData.setReceivedDataCount(receivedDataCount);
         mergedData.setReceivedFileCount(receivedFileCount);
+        mergedData.setTotalFileCount(totalFileCount);
         mergedData.setPhoneNullCount(phoneNullCount);
         mergedData.setDomainNullCount(domainNullCount);
         mergedData.setDestIpNullCount(destIpNullCount);
@@ -94,7 +107,6 @@ public class DataProcessingService {
         mergedData.setSourceIpNullCount(sourceIpNullCount);
         mergedData.setSourcePortNullCount(sourcePortNullCount);
         mergedData.setProtocolNullCount(protocolNullCount);
-
         return mergedData;
     }
 
@@ -114,6 +126,8 @@ public class DataProcessingService {
 
         // 计算回填率 = 空值数量/接收条数
         if (source.getReceivedDataCount() != null && source.getReceivedDataCount() > 0) {
+            calculated.setReceivedRate(calculateRate(source.getTotalFileCount(), calculated.getTotalFileCount()));
+            calculated.setInboundRate(calculateRate(source.getReceivedFileCount(), source.getTotalFileCount()));
             calculated.setPhoneNullRate(calculateRate(source.getPhoneNullCount(), source.getReceivedDataCount()));
             calculated.setDomainNullRate(calculateRate(source.getDomainNullCount(), source.getReceivedDataCount()));
             calculated.setDestIpNullRate(calculateRate(source.getDestIpNullCount(), source.getReceivedDataCount()));
@@ -126,6 +140,6 @@ public class DataProcessingService {
     }
 
     private String calculateRate(Long nullCount, Long totalCount) {
-        return (nullCount == null|| nullCount== 0) ? "-" : String.format("%.2f", (double)nullCount / totalCount*100);
+        return (nullCount == null) ? "-" : String.format("%.2f", (double) nullCount / totalCount * 100);
     }
 }

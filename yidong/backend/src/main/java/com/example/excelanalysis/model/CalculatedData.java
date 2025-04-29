@@ -34,7 +34,13 @@ public class CalculatedData {
     
     @Column(name = "received_file_count")
     private Long receivedFileCount;  // 接收文件总数
-    
+
+    @Column(name = "received_rate")
+    private String receivedRate;  // 接收文件比率
+
+    @Column(name = "inbound_rate")
+    private String inboundRate;  // 入库文件比率
+
     @Column(name = "phone_null_rate")
     private String phoneNullRate;       // 用户号码空值率
     
@@ -54,122 +60,4 @@ public class CalculatedData {
     private String sourcePortNullRate;  // 源端口空值率
     @Column(name= "protocol_null_rate")
     private String protocolNullRate;
-    public String getProtocolNullRate(){
-        return protocolNullRate;
-    }
-    public void setProtocolNullRate(String protocolNullRate){
-        this.protocolNullRate=protocolNullRate;
-    }
-    // 手动添加getter和setter方法
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public String getBusinessType() {
-        return businessType;
-    }
-    
-    public void setBusinessType(String businessType) {
-        this.businessType = businessType;
-    }
-    
-    public String getNetworkType() {
-        return networkType;
-    }
-    
-    public void setNetworkType(String networkType) {
-        this.networkType = networkType;
-    }
-    
-    public LocalDate getTime() {
-        return time;
-    }
-    
-    public void setTime(LocalDate time) {
-        this.time = time;
-    }
-    
-    public Long getTotalDataCount() {
-        return totalDataCount;
-    }
-    
-    public void setTotalDataCount(Long totalDataCount) {
-        this.totalDataCount = totalDataCount;
-    }
-    
-    public Long getReceivedCount() {
-        return receivedCount;
-    }
-    
-    public void setReceivedCount(Long receivedCount) {
-        this.receivedCount = receivedCount;
-    }
-    
-    public Long getTotalFileCount() {
-        return totalFileCount;
-    }
-    
-    public void setTotalFileCount(Long totalFileCount) {
-        this.totalFileCount = totalFileCount;
-    }
-    
-    public Long getReceivedFileCount() {
-        return receivedFileCount;
-    }
-    
-    public void setReceivedFileCount(Long receivedFileCount) {
-        this.receivedFileCount = receivedFileCount;
-    }
-    
-    public String getPhoneNullRate() {
-        return phoneNullRate;
-    }
-    
-    public void setPhoneNullRate(String phoneNullRate) {
-        this.phoneNullRate = phoneNullRate;
-    }
-    
-    public String getDomainNullRate() {
-        return domainNullRate;
-    }
-    
-    public void setDomainNullRate(String domainNullRate) {
-        this.domainNullRate = domainNullRate;
-    }
-    
-    public String getDestIpNullRate() {
-        return destIpNullRate;
-    }
-    
-    public void setDestIpNullRate(String destIpNullRate) {
-        this.destIpNullRate = destIpNullRate;
-    }
-    
-    public String getDestPortNullRate() {
-        return destPortNullRate;
-    }
-    
-    public void setDestPortNullRate(String destPortNullRate) {
-        this.destPortNullRate = destPortNullRate;
-    }
-    
-    public String getSourceIpNullRate() {
-        return sourceIpNullRate;
-    }
-    
-    public void setSourceIpNullRate(String sourceIpNullRate) {
-        this.sourceIpNullRate = sourceIpNullRate;
-    }
-    
-    public String getSourcePortNullRate() {
-        return sourcePortNullRate;
-    }
-    
-    public void setSourcePortNullRate(String sourcePortNullRate) {
-        this.sourcePortNullRate = sourcePortNullRate;
-    }
 }
