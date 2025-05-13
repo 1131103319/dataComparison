@@ -2,6 +2,7 @@ package com.example.omcserver.service.impl;
 
 import com.example.omcserver.model.Alarm;
 import com.example.omcserver.service.DataSourceService;
+import jdk.jpackage.internal.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -40,6 +41,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 alarm.setOrigSeverity(rs.getString("origSeverity"));
                 alarm.setEventTime(rs.getString("eventTime"));
                 alarm.setAlarmId(rs.getString("alarmId"));
+                alarm.setAlarmSeq(rs.getString("alarmSeq"));
                 alarm.setSpecificProblemID(rs.getString("specificProblemID"));
                 alarm.setSpecificProblem(rs.getString("specificProblem"));
                 alarm.setNeUID(rs.getString("neUID"));
@@ -53,15 +55,15 @@ public class DataSourceServicelmpl implements DataSourceService {
                 return alarm;
             }
         });
-        System.out.println("alarms:" + alarms);
+        Log.info("alarms:" + alarms);
         return alarms;
     }
 
     @Override
-    public List<Alarm> listAlarm(int id) {
-        String sql = "select * from omc_alert_information_tb where alarmId>=?";
+    public List<Alarm> listAlarm(int alarmSeq) {
+        String sql = "select * from omc_alert_information_tb where alarmSeq>=?";
 
-        List<Alarm> alarms = jdbcTemplateOne.query(sql, new Object[]{id}, new RowMapper<Alarm>() {
+        List<Alarm> alarms = jdbcTemplateOne.query(sql, new Object[]{alarmSeq}, new RowMapper<Alarm>() {
             @Override
             public Alarm mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Alarm alarm = new Alarm();
@@ -71,6 +73,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 alarm.setOrigSeverity(rs.getString("origSeverity"));
                 alarm.setEventTime(rs.getString("eventTime"));
                 alarm.setAlarmId(rs.getString("alarmId"));
+                alarm.setAlarmSeq(rs.getString("alarmSeq"));
                 alarm.setSpecificProblemID(rs.getString("specificProblemID"));
                 alarm.setSpecificProblem(rs.getString("specificProblem"));
                 alarm.setNeUID(rs.getString("neUID"));
@@ -125,6 +128,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 alarm.setOrigSeverity(rs.getString("origSeverity"));
                 alarm.setEventTime(rs.getString("eventTime"));
                 alarm.setAlarmId(rs.getString("alarmId"));
+                alarm.setAlarmSeq(rs.getString("alarmSeq"));
                 alarm.setSpecificProblemID(rs.getString("specificProblemID"));
                 alarm.setSpecificProblem(rs.getString("specificProblem"));
                 alarm.setNeUID(rs.getString("neUID"));
