@@ -16,5 +16,5 @@ objectName varchar(50),
 objectType varchar(50),
 locationInfo varchar(50),
 addInfo varchar(50),
-status boolean;
+status boolean
 );

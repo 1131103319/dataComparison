@@ -2,7 +2,7 @@ package com.example.omcserver.service.impl;
 
 import com.example.omcserver.model.Alarm;
 import com.example.omcserver.service.DataSourceService;
-import jdk.jpackage.internal.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @Service
 public class DataSourceServicelmpl implements DataSourceService {
     @Autowired
@@ -22,10 +22,10 @@ public class DataSourceServicelmpl implements DataSourceService {
 
     @Override
     public void addUser(Alarm alarm) {
-        String sql = "INSERT INTO omc_alert_information_tb (alarmTitle,alarmStatus,alarmType,origSeverity,eventTime,alarmId,specificProblemID,specificProblem,neUID,neName,neType,objectUID,objectName,objectType,locationInfo,addInfo,status)" +
+        String sql = "INSERT INTO omc_alert_information_tb (alarmTitle,alarmStatus,alarmType,origSeverity,eventTime,alarmId,alarmSeq,specificProblemID,specificProblem,neUID,neName,neType,objectUID,objectName,objectType,locationInfo,addInfo,status)" +
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         //2.调用 update语句，执行方法
-        jdbcTemplateOne.update(sql, alarm.getAlarmTitle(), alarm.getAlarmStatus(), alarm.getAlarmType(), alarm.getOrigSeverity(), alarm.getEventTime(), alarm.getAlarmId(), alarm.getSpecificProblemID(), alarm.getSpecificProblem(), alarm.getNeUID(), alarm.getObjectName(), alarm.getObjectType(), alarm.getLocationInfo(), alarm.getAddInfo(), "false");
+        jdbcTemplateOne.update(sql, alarm.getAlarmTitle(), alarm.getAlarmStatus(), alarm.getAlarmType(), alarm.getOrigSeverity(), alarm.getEventTime(), alarm.getAlarmId(),alarm.getAlarmSeq(), alarm.getSpecificProblemID(), alarm.getSpecificProblem(), alarm.getNeUID(), alarm.getObjectName(), alarm.getObjectType(), alarm.getLocationInfo(), alarm.getAddInfo(), "false");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 return alarm;
             }
         });
-        Log.info("alarms:" + alarms);
+        log.info("alarms:" + alarms);
         return alarms;
     }
 
