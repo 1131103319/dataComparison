@@ -4,12 +4,11 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-
-@Component
+@Configuration
 public class DataSourceConfig {
     /**
      * 创建 springboot 的数据库的数据源 DataSource
@@ -18,7 +17,6 @@ public class DataSourceConfig {
     @Bean("dataSourceOne")
     @ConfigurationProperties("spring.datasource.one")
     public DataSource dataSourceOne(){
-
         return DruidDataSourceBuilder.create().build();
     }
     @Bean("jdbcTemplateOne")
