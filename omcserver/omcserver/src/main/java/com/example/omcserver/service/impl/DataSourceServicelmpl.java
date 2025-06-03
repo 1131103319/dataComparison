@@ -472,8 +472,8 @@ public class DataSourceServicelmpl implements DataSourceService {
     @Override
     public List<Integer> getAlarmSeq(String bussiness) {
         try {
-            String sql = "select alarmSeq from omc_alert_information_tb where bussiness=? and alarmed=false";
-            String sql1 = "update omc_alert_information_tb set alarmed=true where bussiness=? and alarmed=false";
+            String sql = "select alarmSeq from omc_alert_information_tb where bussiness=? and alarmed=false and alarmStatus=1";
+            String sql1 = "update omc_alert_information_tb set alarmed=true where bussiness=? and alarmed=false and alarmStatus=1";
             List<Integer> integers = jdbcTemplateOne.queryForList(sql, Integer.class, bussiness);
             log.info("执行sql{}-{}", sql, bussiness);
             jdbcTemplateOne.update(sql1,bussiness);
