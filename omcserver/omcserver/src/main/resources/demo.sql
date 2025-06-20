@@ -18,5 +18,6 @@ locationInfo varchar(50),
 addInfo varchar(50),
 status boolean,
 alarmed boolean,
-bussiness varchar(50)
+bussiness varchar(50),
+flowTime datetime
 );

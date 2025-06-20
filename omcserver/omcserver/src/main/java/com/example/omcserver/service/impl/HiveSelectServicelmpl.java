@@ -35,7 +35,7 @@ public class HiveSelectServicelmpl implements HiveSelectService {
 
     public String getBeforTime() {
         LocalDateTime currentTime = LocalDateTime.now();
-        LocalDateTime localDateTime = currentTime.minusHours(3);
+        LocalDateTime localDateTime = currentTime.minusHours(4);
         // 定义日期时间格式
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
         // 格式化当前时间
@@ -45,7 +45,7 @@ public class HiveSelectServicelmpl implements HiveSelectService {
 
     public String getAfterTime() {
         LocalDateTime currentTime = LocalDateTime.now();
-        LocalDateTime localDateTime = currentTime.minusHours(2);
+        LocalDateTime localDateTime = currentTime.minusHours(3);
         // 定义日期时间格式
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
         // 格式化当前时间

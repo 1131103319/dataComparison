@@ -79,7 +79,7 @@ public class DataSourceServicelmpl implements DataSourceService {
 
     @Override
     public List<Alarm> listAlarm(int alarmSeq) {
-        String sql = "select * from omc_alert_information_tb where alarmSeq>=?";
+        String sql = "select * from omc_alert_information_tb where alarmSeq>=? and status=true and flowTime is not null";
 
         List<Alarm> alarms = jdbcTemplateOne.query(sql, new Object[]{alarmSeq}, new RowMapper<Alarm>() {
             @Override
@@ -109,20 +109,30 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public List<Alarm> listAlarm(String startTime, String endTime) {
+    public List<Alarm> listAlarm(String startTime, String endTime,String syncSource) {
         String sql = "";
-        if ("".equals(startTime)) {
+        if ("".equals(startTime)||"null".equals(startTime)) {
             startTime = null;
         }
-        if ("".equals(endTime)) {
+        if ("".equals(endTime)||"null".equals(endTime)) {
             endTime = null;
         }
-        if (startTime != null && endTime == null) {
-            sql = "select * from omc_alert_information_tb where eventTime>=?";
-        } else if (startTime == null && endTime != null) {
-            sql = "select * from omc_alert_information_tb where eventTime<=?";
-        } else if (startTime != null && endTime != null) {
-            sql = "select * from omc_alert_information_tb where eventTime>=? and eventTime<=?";
+        if(syncSource.equals("0")) {
+            if (startTime != null && endTime == null) {
+                sql = "select * from omc_alert_information_tb where eventTime>=? and alarmStatus='1' and flowTime is not null";
+            } else if (startTime == null && endTime != null) {
+                sql = "select * from omc_alert_information_tb where eventTime<=? and alarmStatus='1' and flowTime is not null";
+            } else if (startTime != null && endTime != null) {
+                sql = "select * from omc_alert_information_tb where eventTime>=? and eventTime<=? and alarmStatus='1' and flowTime is not null";
+            }
+        }else{
+            if (startTime != null && endTime == null) {
+                sql = "select * from omc_alert_information_tb where flowTime>=? and flowTime is not null";
+            } else if (startTime == null && endTime != null) {
+                sql = "select * from omc_alert_information_tb where flowTime<=? and flowTime is not null";
+            } else if (startTime != null && endTime != null) {
+                sql = "select * from omc_alert_information_tb where flowTime>=? and flowTime<=? and flowTime is not null";
+            }
         }
         List<Object> params = new ArrayList<>();
 
@@ -162,13 +172,34 @@ public class DataSourceServicelmpl implements DataSourceService {
         });
         return alarms;
     }
+    public void updateErrorStatus(){
+        try {
+            String sql = "update omc_alert_information_tb set status=false where status=true and flowTime is null";
+            log.info("恢复异常重启告警，执行sql {}", sql);
+            jdbcTemplateOne.update(sql);
+        } catch (Exception e) {
+            log.error("异常",e);
+            throw e;
+        }
+    }
 
     @Override
     public void updateStatus() {
         try {
             String sql = "update omc_alert_information_tb set status=true where status=false";
-            log.info("执行sql {}", sql);
+            log.info("标记已经获取的告警信息，执行sql {}", sql);
             jdbcTemplateOne.update(sql);
+        } catch (Exception e) {
+            log.error("异常",e);
+            throw e;
+        }
+    }
+    @Override
+    public void updateFlowTime(String formatTime,String alarmSeq){
+        try {
+            String sql = "update omc_alert_information_tb set flowTime=? where alarmSeq=?";
+            log.info("记录发送告警信息时间，执行sql {}", sql);
+            jdbcTemplateOne.update(sql,formatTime,alarmSeq);
         } catch (Exception e) {
             log.error("异常",e);
             throw e;
@@ -180,7 +211,12 @@ public class DataSourceServicelmpl implements DataSourceService {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when msisdn = '' or msisdn is null or msisdn = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_4glog_2c_log where partition_date >=? and  partition_date <=?;";
-            Integer i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            Integer i=null;
+            try {
+                 i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            }catch (Exception e){
+                log.error("查询失败",e);
+            }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
             alarm.setAlarmSeq(String.valueOf(maxId + 1));
@@ -201,7 +237,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("4GMDN");
+                log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
+                    alarm.setAlarmSeq(String.valueOf(++maxId));
                     alarm.setAlarmId(String.valueOf(alarmId));
                     alarm.setAlarmStatus(String.valueOf(0));
                     addAlarm(alarm, "4GMDN");
@@ -222,7 +260,12 @@ public class DataSourceServicelmpl implements DataSourceService {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_4glog_2c_log where partition_date >=? and  partition_date <=?;";
-            Integer i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            Integer i=null;
+            try {
+                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            }catch (Exception e){
+                log.error("查询失败",e);
+            }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
             alarm.setAlarmSeq(String.valueOf(maxId + 1));
@@ -243,7 +286,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("4GIP");
+                log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
+                    alarm.setAlarmSeq(String.valueOf(++maxId));
                     alarm.setAlarmId(String.valueOf(alarmId));
                     alarm.setAlarmStatus(String.valueOf(0));
                     addAlarm(alarm, "4GIP");
@@ -264,7 +309,12 @@ public class DataSourceServicelmpl implements DataSourceService {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when msisdn = '' or msisdn is null or msisdn = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_5gsalog_2c_log where partition_date >=? and  partition_date <=?;";
-            Integer i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            Integer i=null;
+            try {
+                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            }catch (Exception e){
+                log.error("查询失败",e);
+            }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
             alarm.setAlarmSeq(String.valueOf(maxId + 1));
@@ -285,7 +335,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("5GMDN");
+                log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
+                    alarm.setAlarmSeq(String.valueOf(++maxId));
                     alarm.setAlarmId(String.valueOf(alarmId));
                     alarm.setAlarmStatus(String.valueOf(0));
                     addAlarm(alarm, "5GMDN");
@@ -306,7 +358,12 @@ public class DataSourceServicelmpl implements DataSourceService {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_5gsalog_2c_log where partition_date >=? and  partition_date <=?;";
-            Integer i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            Integer i=null;
+            try {
+                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            }catch (Exception e){
+                log.error("查询失败",e);
+            }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
             alarm.setAlarmSeq(String.valueOf(maxId + 1));
@@ -327,7 +384,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("5GIP");
+                log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
+                    alarm.setAlarmSeq(String.valueOf(++maxId));
                     alarm.setAlarmId(String.valueOf(alarmId));
                     alarm.setAlarmStatus(String.valueOf(0));
                     addAlarm(alarm, "5GIP");
@@ -348,7 +407,12 @@ public class DataSourceServicelmpl implements DataSourceService {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when swzh = '' or swzh is null or swzh = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_homelog_log where partition_date >=? and  partition_date <=?;";
-            Integer i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            Integer i=null;
+            try {
+                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            }catch (Exception e){
+                log.error("查询失败",e);
+            }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
             alarm.setAlarmSeq(String.valueOf(maxId + 1));
@@ -369,7 +433,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("HOMEACCOUNT");
+                log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
+                    alarm.setAlarmSeq(String.valueOf(++maxId));
                     alarm.setAlarmId(String.valueOf(alarmId));
                     alarm.setAlarmStatus(String.valueOf(0));
                     addAlarm(alarm, "HOMEACCOUNT");
@@ -390,7 +456,12 @@ public class DataSourceServicelmpl implements DataSourceService {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_homelog_log where partition_date >=? and  partition_date <=?;";
-            Integer i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            Integer i=null;
+            try {
+                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            }catch (Exception e){
+                log.error("查询失败",e);
+            }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
             alarm.setAlarmSeq(String.valueOf(maxId + 1));
@@ -411,7 +482,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("HOMEIP");
+                log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
+                    alarm.setAlarmSeq(String.valueOf(++maxId));
                     alarm.setAlarmId(String.valueOf(alarmId));
                     alarm.setAlarmStatus(String.valueOf(0));
                     addAlarm(alarm, "HOMEIP");
@@ -432,7 +505,12 @@ public class DataSourceServicelmpl implements DataSourceService {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when srcip = '' or srcip is null or srcip = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_pv_log where partition_date >=? and  partition_date <=?;";
-            Integer i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            Integer i=null;
+            try {
+                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+            }catch (Exception e){
+                log.error("查询失败",e);
+            }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
             alarm.setAlarmSeq(String.valueOf(maxId + 1));
@@ -453,7 +531,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("IDCIP");
+                log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
+                    alarm.setAlarmSeq(String.valueOf(++maxId));
                     alarm.setAlarmId(String.valueOf(alarmId));
                     alarm.setAlarmStatus(String.valueOf(0));
                     addAlarm(alarm, "IDCIP");
@@ -475,7 +555,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select alarmSeq from omc_alert_information_tb where bussiness=? and alarmed=false and alarmStatus=1";
             String sql1 = "update omc_alert_information_tb set alarmed=true where bussiness=? and alarmed=false and alarmStatus=1";
             List<Integer> integers = jdbcTemplateOne.queryForList(sql, Integer.class, bussiness);
-            log.info("执行sql{}-{}", sql, bussiness);
+            log.info("执行sql{}-{}-{}", sql, bussiness,integers);
             jdbcTemplateOne.update(sql1,bussiness);
             log.info("执行sql{}-{}", sql1, bussiness);
             return integers;

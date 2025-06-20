@@ -7,6 +7,7 @@ import com.example.excelanalysis.repository.CalculatedDataRepository;
 import com.example.excelanalysis.repository.SourceDataRepository;
 import com.example.excelanalysis.util.ExcelUtil;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,14 +117,21 @@ public class DataComparisonService {
                 cell.setCellStyle(headerStyle);
                 sheet.setColumnWidth(i, 256 * 20);  // 设置列宽
             }
-            
+
+            DataValidationHelper validationHelper = sheet.getDataValidationHelper();
+            String[] bussinessType = {"4GLOG_2C", "5GSALOG_2C", "5GSALOG_2B", "5GNSALOG_2B", "5GNSALOG_2C", "5GNSAAUTH_2C", "5GNSAAUTH_2B", "5GSAAUTH_2C", "5GSAAUTH_2B"};
+            CellRangeAddressList addressList = new CellRangeAddressList(1, 1000, 0, 0);
+            DataValidationConstraint constraint = validationHelper.createExplicitListConstraint(bussinessType);
+            // 创建数据验证规则，结合约束条件和应用区域
+            DataValidation validation = validationHelper.createValidation(constraint, addressList);
+            // 将数据验证规则添加到工作表中
+            sheet.addValidationData(validation);
             // 添加示例数据
             Row exampleRow = sheet.createRow(1);
-            exampleRow.createCell(0).setCellValue("24IOT_4GLog_2B");
+            exampleRow.createCell(0).setCellValue("4GLOG_2C");
             exampleRow.createCell(1).setCellValue("2024-01-01");
             exampleRow.createCell(2).setCellValue(12000);
             exampleRow.createCell(3).setCellValue(120);
-            
             // 将工作簿写入字节数组
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             workbook.write(bos);

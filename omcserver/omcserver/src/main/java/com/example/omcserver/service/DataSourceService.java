@@ -8,13 +8,18 @@ public interface DataSourceService {
 
     void addAlarm(Alarm alarm,String bussiness);
     int getMaxId();
+    //todo 获取所有需要告警的信息
     List<Alarm> listAlarm();
-
+    //todo 获取大于等于id的告警
     List<Alarm> listAlarm(int id);
-
-    public List<Alarm> listAlarm(String startTime, String endTime);
-
+    //todo 获取指定时间范围的告警
+    public List<Alarm> listAlarm(String startTime, String endTime,String syncSource);
+    //todo 标记已经获取的告警
     void updateStatus();
+    //todo 更新流水时间
+    void updateFlowTime(String formatTime,String alarmSeq);
+    //todo 重启恢复异常状态
+    void updateErrorStatus();
     void get4Gmdn(String startTime,String endTime);
     void get4Gsourceip(String startTime,String endTime);
     void get5Gmdn(String startTime,String endTime);
