@@ -54,12 +54,12 @@ public class DataSourceServicelmpl implements DataSourceService {
             public Alarm mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Alarm alarm = new Alarm();
                 alarm.setAlarmTitle(rs.getString("alarmTitle"));
-                alarm.setAlarmStatus(rs.getString("alarmStatus"));
+                alarm.setAlarmStatus(rs.getInt("alarmStatus"));
                 alarm.setAlarmType(rs.getString("alarmType"));
                 alarm.setOrigSeverity(rs.getString("origSeverity"));
                 alarm.setEventTime(rs.getString("eventTime"));
                 alarm.setAlarmId(rs.getString("alarmId"));
-                alarm.setAlarmSeq(rs.getString("alarmSeq"));
+                alarm.setAlarmSeq(rs.getInt("alarmSeq"));
                 alarm.setSpecificProblemID(rs.getString("specificProblemID"));
                 alarm.setSpecificProblem(rs.getString("specificProblem"));
                 alarm.setNeUID(rs.getString("neUID"));
@@ -86,12 +86,12 @@ public class DataSourceServicelmpl implements DataSourceService {
             public Alarm mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Alarm alarm = new Alarm();
                 alarm.setAlarmTitle(rs.getString("alarmTitle"));
-                alarm.setAlarmStatus(rs.getString("alarmStatus"));
+                alarm.setAlarmStatus(rs.getInt("alarmStatus"));
                 alarm.setAlarmType(rs.getString("alarmType"));
                 alarm.setOrigSeverity(rs.getString("origSeverity"));
                 alarm.setEventTime(rs.getString("eventTime"));
                 alarm.setAlarmId(rs.getString("alarmId"));
-                alarm.setAlarmSeq(rs.getString("alarmSeq"));
+                alarm.setAlarmSeq(rs.getInt("alarmSeq"));
                 alarm.setSpecificProblemID(rs.getString("specificProblemID"));
                 alarm.setSpecificProblem(rs.getString("specificProblem"));
                 alarm.setNeUID(rs.getString("neUID"));
@@ -151,12 +151,12 @@ public class DataSourceServicelmpl implements DataSourceService {
             public Alarm mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Alarm alarm = new Alarm();
                 alarm.setAlarmTitle(rs.getString("alarmTitle"));
-                alarm.setAlarmStatus(rs.getString("alarmStatus"));
+                alarm.setAlarmStatus(rs.getInt("alarmStatus"));
                 alarm.setAlarmType(rs.getString("alarmType"));
                 alarm.setOrigSeverity(rs.getString("origSeverity"));
                 alarm.setEventTime(rs.getString("eventTime"));
                 alarm.setAlarmId(rs.getString("alarmId"));
-                alarm.setAlarmSeq(rs.getString("alarmSeq"));
+                alarm.setAlarmSeq(rs.getInt("alarmSeq"));
                 alarm.setSpecificProblemID(rs.getString("specificProblemID"));
                 alarm.setSpecificProblem(rs.getString("specificProblem"));
                 alarm.setNeUID(rs.getString("neUID"));
@@ -219,9 +219,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
-            alarm.setAlarmSeq(String.valueOf(maxId + 1));
+            alarm.setAlarmSeq(maxId + 1);
             alarm.setAlarmId(String.valueOf(maxId + 1));
-            alarm.setAlarmStatus(String.valueOf(1));
+            alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("4G手机号码填充率不足99%");
             alarm.setAlarmType("性能告警");
             alarm.setEventTime(beforTime);
@@ -239,9 +239,9 @@ public class DataSourceServicelmpl implements DataSourceService {
                 List<Integer> alarmSeq = getAlarmSeq("4GMDN");
                 log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
-                    alarm.setAlarmSeq(String.valueOf(++maxId));
+                    alarm.setAlarmSeq(++maxId);
                     alarm.setAlarmId(String.valueOf(alarmId));
-                    alarm.setAlarmStatus(String.valueOf(0));
+                    alarm.setAlarmStatus(0);
                     addAlarm(alarm, "4GMDN");
                     updateAlarmed("4GMDN", String.valueOf(alarmId));
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
@@ -268,9 +268,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
-            alarm.setAlarmSeq(String.valueOf(maxId + 1));
+            alarm.setAlarmSeq(maxId + 1);
             alarm.setAlarmId(String.valueOf(maxId + 1));
-            alarm.setAlarmStatus(String.valueOf(1));
+            alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("4G源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
             alarm.setEventTime(beforTime);
@@ -288,9 +288,9 @@ public class DataSourceServicelmpl implements DataSourceService {
                 List<Integer> alarmSeq = getAlarmSeq("4GIP");
                 log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
-                    alarm.setAlarmSeq(String.valueOf(++maxId));
+                    alarm.setAlarmSeq(++maxId);
                     alarm.setAlarmId(String.valueOf(alarmId));
-                    alarm.setAlarmStatus(String.valueOf(0));
+                    alarm.setAlarmStatus(0);
                     addAlarm(alarm, "4GIP");
                     updateAlarmed("4GIP", String.valueOf(alarmId));
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
@@ -317,9 +317,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
-            alarm.setAlarmSeq(String.valueOf(maxId + 1));
+            alarm.setAlarmSeq(maxId + 1);
             alarm.setAlarmId(String.valueOf(maxId + 1));
-            alarm.setAlarmStatus(String.valueOf(1));
+            alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("5G手机号码填充率不足99%");
             alarm.setAlarmType("性能告警");
             alarm.setEventTime(beforTime);
@@ -337,9 +337,9 @@ public class DataSourceServicelmpl implements DataSourceService {
                 List<Integer> alarmSeq = getAlarmSeq("5GMDN");
                 log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
-                    alarm.setAlarmSeq(String.valueOf(++maxId));
+                    alarm.setAlarmSeq(++maxId);
                     alarm.setAlarmId(String.valueOf(alarmId));
-                    alarm.setAlarmStatus(String.valueOf(0));
+                    alarm.setAlarmStatus(0);
                     addAlarm(alarm, "5GMDN");
                     updateAlarmed("5GMDN", String.valueOf(alarmId));
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
@@ -366,9 +366,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
-            alarm.setAlarmSeq(String.valueOf(maxId + 1));
+            alarm.setAlarmSeq(maxId + 1);
             alarm.setAlarmId(String.valueOf(maxId + 1));
-            alarm.setAlarmStatus(String.valueOf(1));
+            alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("5G源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
             alarm.setEventTime(beforTime);
@@ -386,9 +386,9 @@ public class DataSourceServicelmpl implements DataSourceService {
                 List<Integer> alarmSeq = getAlarmSeq("5GIP");
                 log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
-                    alarm.setAlarmSeq(String.valueOf(++maxId));
+                    alarm.setAlarmSeq(++maxId);
                     alarm.setAlarmId(String.valueOf(alarmId));
-                    alarm.setAlarmStatus(String.valueOf(0));
+                    alarm.setAlarmStatus(0);
                     addAlarm(alarm, "5GIP");
                     updateAlarmed("5GIP", String.valueOf(alarmId));
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
@@ -415,9 +415,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
-            alarm.setAlarmSeq(String.valueOf(maxId + 1));
+            alarm.setAlarmSeq(maxId + 1);
             alarm.setAlarmId(String.valueOf(maxId + 1));
-            alarm.setAlarmStatus(String.valueOf(1));
+            alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("家宽上网账号填充率不足99%");
             alarm.setAlarmType("性能告警");
             alarm.setEventTime(beforTime);
@@ -435,9 +435,9 @@ public class DataSourceServicelmpl implements DataSourceService {
                 List<Integer> alarmSeq = getAlarmSeq("HOMEACCOUNT");
                 log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
-                    alarm.setAlarmSeq(String.valueOf(++maxId));
+                    alarm.setAlarmSeq(++maxId);
                     alarm.setAlarmId(String.valueOf(alarmId));
-                    alarm.setAlarmStatus(String.valueOf(0));
+                    alarm.setAlarmStatus(0);
                     addAlarm(alarm, "HOMEACCOUNT");
                     updateAlarmed("HOMEACCOUNT", String.valueOf(alarmId));
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
@@ -464,9 +464,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
-            alarm.setAlarmSeq(String.valueOf(maxId + 1));
+            alarm.setAlarmSeq(maxId + 1);
             alarm.setAlarmId(String.valueOf(maxId + 1));
-            alarm.setAlarmStatus(String.valueOf(1));
+            alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("家宽源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
             alarm.setEventTime(beforTime);
@@ -484,9 +484,9 @@ public class DataSourceServicelmpl implements DataSourceService {
                 List<Integer> alarmSeq = getAlarmSeq("HOMEIP");
                 log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
-                    alarm.setAlarmSeq(String.valueOf(++maxId));
+                    alarm.setAlarmSeq(++maxId);
                     alarm.setAlarmId(String.valueOf(alarmId));
-                    alarm.setAlarmStatus(String.valueOf(0));
+                    alarm.setAlarmStatus(0);
                     addAlarm(alarm, "HOMEIP");
                     updateAlarmed("HOMEIP", String.valueOf(alarmId));
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
@@ -513,9 +513,9 @@ public class DataSourceServicelmpl implements DataSourceService {
             }
             log.info("执行sql为{}-{}", sql, i);
             Alarm alarm = new Alarm();
-            alarm.setAlarmSeq(String.valueOf(maxId + 1));
+            alarm.setAlarmSeq(maxId + 1);
             alarm.setAlarmId(String.valueOf(maxId + 1));
-            alarm.setAlarmStatus(String.valueOf(1));
+            alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("IDC源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
             alarm.setEventTime(beforTime);
@@ -533,9 +533,9 @@ public class DataSourceServicelmpl implements DataSourceService {
                 List<Integer> alarmSeq = getAlarmSeq("IDCIP");
                 log.info("获取到的取消告警alarmseq {}",alarmSeq);
                 for (Integer alarmId : alarmSeq) {
-                    alarm.setAlarmSeq(String.valueOf(++maxId));
+                    alarm.setAlarmSeq(++maxId);
                     alarm.setAlarmId(String.valueOf(alarmId));
-                    alarm.setAlarmStatus(String.valueOf(0));
+                    alarm.setAlarmStatus(0);
                     addAlarm(alarm, "IDCIP");
                     updateAlarmed("IDCIP", String.valueOf(alarmId));
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
