@@ -2,26 +2,19 @@ package com.example.excelanalysis.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.time.LocalDate;
-
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "source_data")
 public class SourceData {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "ip")
-    private String ip;
-    @Column(name = "business_type")
-    private String businessType;        // 业务类型
+    @EmbeddedId
+    private SourceDataId id=new SourceDataId();
 
     @Column(name = "network_type")
     private String networkType;         // 网络类型
-
-    @Column(name = "time")
-    private LocalDate time;             // 时间
 
     @Column(name = "received_data_count")
     private Long receivedDataCount;  // 接收数据条数

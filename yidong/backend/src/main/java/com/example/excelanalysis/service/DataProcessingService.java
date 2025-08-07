@@ -28,7 +28,7 @@ public class DataProcessingService {
             //如果有重复的就删除重新处理
             calculatedDataRepository.deleteByTimeAndBusinessType(excelData.getTime(), excelData.getBusinessType());
             // 根据业务类型和日期从source_data表查询数据
-            List<SourceData> sourceDataList = sourceDataRepository.findByBusinessTypeAndTime(
+            List<SourceData> sourceDataList = sourceDataRepository.findById_BusinessTypeAndId_Time(
                     excelData.getBusinessType(),
                     excelData.getTime()
             );
@@ -57,9 +57,9 @@ public class DataProcessingService {
 
         // 使用第一条记录的基本信息
         SourceData firstData = sourceDataList.get(0);
-        mergedData.setBusinessType(firstData.getBusinessType());
+        mergedData.getId().setBusinessType(firstData.getId().getBusinessType());
         mergedData.setNetworkType(firstData.getNetworkType());
-        mergedData.setTime(firstData.getTime());
+        mergedData.getId().setTime(firstData.getId().getTime());
 
         // 累加所有数值字段
         Long receivedDataCount = 0L;
@@ -114,9 +114,9 @@ public class DataProcessingService {
         CalculatedData calculated = new CalculatedData();
 
         // 从source_data表获取的数据
-        calculated.setBusinessType(source.getBusinessType());  // 业务类型
+        calculated.setBusinessType(source.getId().getBusinessType());  // 业务类型
         calculated.setNetworkType(source.getNetworkType());   // 网络类型
-        calculated.setTime(source.getTime());  // 时间
+        calculated.setTime(source.getId().getTime());  // 时间
         calculated.setReceivedCount(source.getReceivedDataCount());     // 接收数据量
         calculated.setReceivedFileCount(source.getReceivedFileCount()); // 接收文件量
 

@@ -213,7 +213,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select round(sum(case when msisdn = '' or msisdn is null or msisdn = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_4glog_2c_log where partition_date >=? and  partition_date <=?;";
             Integer i=null;
             try {
-                 i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+//                 i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
             }catch (Exception e){
                 log.error("查询失败",e);
             }
@@ -234,6 +234,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setOrigSeverity("3");
             alarm.setSpecificProblem(beforTime + "-" + afterTime + " 时段，4G手机号码填充率" + i + "%");
             alarm.setSpecificProblemID(String.valueOf(1));
+            i=100;
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("4GMDN");
@@ -262,7 +263,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_4glog_2c_log where partition_date >=? and  partition_date <=?;";
             Integer i=null;
             try {
-                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+//                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
             }catch (Exception e){
                 log.error("查询失败",e);
             }
@@ -283,6 +284,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setOrigSeverity("3");
             alarm.setSpecificProblem(beforTime + "-" + afterTime + " 时段，4G源公网IP填充率" + i + "%");
             alarm.setSpecificProblemID(String.valueOf(2));
+            i=100;
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("4GIP");
@@ -311,7 +313,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select round(sum(case when msisdn = '' or msisdn is null or msisdn = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_5gsalog_2c_log where partition_date >=? and  partition_date <=?;";
             Integer i=null;
             try {
-                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+//                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
             }catch (Exception e){
                 log.error("查询失败",e);
             }
@@ -332,6 +334,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setOrigSeverity("3");
             alarm.setSpecificProblem(beforTime + "-" + afterTime + " 时段，5G手机号码填充率" + i + "%");
             alarm.setSpecificProblemID(String.valueOf(3));
+            i=100;
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("5GMDN");
@@ -360,7 +363,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_5gsalog_2c_log where partition_date >=? and  partition_date <=?;";
             Integer i=null;
             try {
-                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+//                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
             }catch (Exception e){
                 log.error("查询失败",e);
             }
@@ -381,6 +384,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setOrigSeverity("3");
             alarm.setSpecificProblem(beforTime + "-" + afterTime + " 时段，5G源公网IP填充率" + i + "%");
             alarm.setSpecificProblemID(String.valueOf(4));
+            i=100;
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("5GIP");
@@ -409,7 +413,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select round(sum(case when swzh = '' or swzh is null or swzh = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_homelog_log where partition_date >=? and  partition_date <=?;";
             Integer i=null;
             try {
-                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+//                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
             }catch (Exception e){
                 log.error("查询失败",e);
             }
@@ -430,6 +434,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setOrigSeverity("3");
             alarm.setSpecificProblem(beforTime + "-" + afterTime + " 时段，家宽上网账号填充率" + i + "%");
             alarm.setSpecificProblemID(String.valueOf(5));
+            i=100;
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("HOMEACCOUNT");
@@ -458,7 +463,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_homelog_log where partition_date >=? and  partition_date <=?;";
             Integer i=null;
             try {
-                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+//                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
             }catch (Exception e){
                 log.error("查询失败",e);
             }
@@ -479,6 +484,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setOrigSeverity("3");
             alarm.setSpecificProblem(beforTime + "-" + afterTime + " 时段，家宽源公网IP填充率" + i + "%");
             alarm.setSpecificProblemID(String.valueOf(6));
+            i=100;
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("HOMEIP");
@@ -507,7 +513,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             String sql = "select round(sum(case when srcip = '' or srcip is null or srcip = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_pv_log where partition_date >=? and  partition_date <=?;";
             Integer i=null;
             try {
-                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
+//                i = jdbcTemplateTwo.queryForObject(sql, new Object[]{beforTime, afterTime}, Integer.class);
             }catch (Exception e){
                 log.error("查询失败",e);
             }
@@ -528,6 +534,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setOrigSeverity("3");
             alarm.setSpecificProblem(beforTime + "-" + afterTime + " 时段，IDC源公网IP填充率" + i + "%");
             alarm.setSpecificProblemID(String.valueOf(7));
+            i=100;
             if(i==null) return;
             if (i >= 99) {
                 List<Integer> alarmSeq = getAlarmSeq("IDCIP");
