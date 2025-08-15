@@ -205,6 +205,19 @@ public class DataSourceServicelmpl implements DataSourceService {
             throw e;
         }
     }
+    @Override
+    public Integer getAlarmStatus(String bussiness) {
+        try {
+            String sql = "select alarmStatus from omc_alert_information_tb where alarmSeq=(select max(alarmSeq) from omc_alert_information_tb where bussiness=?)";
+            log.info("获取到业务{}当前告警状态,执行sql{}", bussiness, sql);
+            Integer i = jdbcTemplateOne.queryForObject(sql, new Object[]{bussiness}, Integer.class);
+            log.info("获取到业务{}当前告警状态,执行sql{},获取到的状态为{}", bussiness, sql,i);
+            return i;
+        }catch (Exception e){
+            log.error("获取到业务{}当前告警状态,执行sql{},获取到的状态为{}", bussiness,e);
+        }
+        return -1;
+    }
 
     @Override
     public void get4Gmdn(String beforTime, String afterTime) {
@@ -248,8 +261,11 @@ public class DataSourceServicelmpl implements DataSourceService {
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
                 }
             } else {
-                addAlarm(alarm, "4GMDN");
-                log.info("告警日志{}", alarm);
+                Integer alarmStatus = getAlarmStatus("4GMDN");
+                if(alarmStatus== 1) {
+                    addAlarm(alarm, "4GMDN");
+                    log.info("添加告警日志{}", alarm);
+                }
             }
         } catch (Exception e) {
             log.error("异常",e);
@@ -298,8 +314,11 @@ public class DataSourceServicelmpl implements DataSourceService {
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
                 }
             } else {
-                addAlarm(alarm, "4GIP");
-                log.info("告警日志{}", alarm);
+                Integer alarmStatus = getAlarmStatus("4GIP");
+                if(alarmStatus== 1) {
+                    addAlarm(alarm, "4GIP");
+                    log.info("添加告警日志{}", alarm);
+                }
             }
         } catch (Exception e) {
             log.error("异常",e);
@@ -348,8 +367,11 @@ public class DataSourceServicelmpl implements DataSourceService {
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
                 }
             } else {
-                addAlarm(alarm, "5GMDN");
-                log.info("告警日志{}", alarm);
+                Integer alarmStatus = getAlarmStatus("5GMDN");
+                if(alarmStatus== 1) {
+                    addAlarm(alarm, "5GMDN");
+                    log.info("添加告警日志{}", alarm);
+                }
             }
         } catch (Exception e) {
             log.error("异常",e);
@@ -398,8 +420,11 @@ public class DataSourceServicelmpl implements DataSourceService {
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
                 }
             } else {
-                addAlarm(alarm, "5GIP");
-                log.info("告警日志{}", alarm);
+                Integer alarmStatus = getAlarmStatus("5GIP");
+                if(alarmStatus== 1) {
+                    addAlarm(alarm, "5GIP");
+                    log.info("添加告警日志{}", alarm);
+                }
             }
         } catch (Exception e) {
             log.error("异常",e);
@@ -448,8 +473,11 @@ public class DataSourceServicelmpl implements DataSourceService {
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
                 }
             } else {
-                addAlarm(alarm, "HOMEACCOUNT");
-                log.info("告警日志{}", alarm);
+                Integer alarmStatus = getAlarmStatus("HOMEACCOUNT");
+                if(alarmStatus== 1) {
+                    addAlarm(alarm, "HOMEACCOUNT");
+                    log.info("添加告警日志{}", alarm);
+                }
             }
         } catch (Exception e) {
             log.error("异常",e);
@@ -498,8 +526,11 @@ public class DataSourceServicelmpl implements DataSourceService {
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
                 }
             } else {
-                addAlarm(alarm, "HOMEIP");
-                log.info("告警日志{}", alarm);
+                Integer alarmStatus = getAlarmStatus("HOMEIP");
+                if(alarmStatus== 1) {
+                    addAlarm(alarm, "HOMEIP");
+                    log.info("添加告警日志{}", alarm);
+                }
             }
         } catch (Exception e) {
             log.error("异常",e);
@@ -548,8 +579,11 @@ public class DataSourceServicelmpl implements DataSourceService {
                     log.info("告警日志取消 {}-{}", alarmId, alarm);
                 }
             } else {
-                addAlarm(alarm, "IDCIP");
-                log.info("告警日志{}", alarm);
+                Integer alarmStatus = getAlarmStatus("IDCIP");
+                if(alarmStatus== 1) {
+                    addAlarm(alarm, "IDCIP");
+                    log.info("添加告警日志{}", alarm);
+                }
             }
         } catch (Exception e) {
             log.error("异常",e);

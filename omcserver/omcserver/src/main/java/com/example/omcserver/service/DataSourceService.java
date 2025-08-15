@@ -29,4 +29,6 @@ public interface DataSourceService {
     void getIdcsourceip(String startTime,String endTime);
     List<Integer> getAlarmSeq(String alarmTitle);
     void updateAlarmed(String bussiness,String alarmId);
+    //todo 获取到业务当前最新状态 0清除，1告警
+    Integer getAlarmStatus(String bussiness);
 }
