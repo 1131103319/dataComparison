@@ -262,7 +262,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 }
             } else {
                 Integer alarmStatus = getAlarmStatus("4GMDN");
-                if(alarmStatus== 1) {
+                if(alarmStatus== 0) {
                     addAlarm(alarm, "4GMDN");
                     log.info("添加告警日志{}", alarm);
                 }
@@ -315,7 +315,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 }
             } else {
                 Integer alarmStatus = getAlarmStatus("4GIP");
-                if(alarmStatus== 1) {
+                if(alarmStatus== 0) {
                     addAlarm(alarm, "4GIP");
                     log.info("添加告警日志{}", alarm);
                 }
@@ -368,7 +368,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 }
             } else {
                 Integer alarmStatus = getAlarmStatus("5GMDN");
-                if(alarmStatus== 1) {
+                if(alarmStatus== 0) {
                     addAlarm(alarm, "5GMDN");
                     log.info("添加告警日志{}", alarm);
                 }
@@ -421,7 +421,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 }
             } else {
                 Integer alarmStatus = getAlarmStatus("5GIP");
-                if(alarmStatus== 1) {
+                if(alarmStatus== 0) {
                     addAlarm(alarm, "5GIP");
                     log.info("添加告警日志{}", alarm);
                 }
@@ -474,7 +474,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 }
             } else {
                 Integer alarmStatus = getAlarmStatus("HOMEACCOUNT");
-                if(alarmStatus== 1) {
+                if(alarmStatus== 0) {
                     addAlarm(alarm, "HOMEACCOUNT");
                     log.info("添加告警日志{}", alarm);
                 }
@@ -527,7 +527,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 }
             } else {
                 Integer alarmStatus = getAlarmStatus("HOMEIP");
-                if(alarmStatus== 1) {
+                if(alarmStatus== 0) {
                     addAlarm(alarm, "HOMEIP");
                     log.info("添加告警日志{}", alarm);
                 }
@@ -580,7 +580,7 @@ public class DataSourceServicelmpl implements DataSourceService {
                 }
             } else {
                 Integer alarmStatus = getAlarmStatus("IDCIP");
-                if(alarmStatus== 1) {
+                if(alarmStatus== 0) {
                     addAlarm(alarm, "IDCIP");
                     log.info("添加告警日志{}", alarm);
                 }
