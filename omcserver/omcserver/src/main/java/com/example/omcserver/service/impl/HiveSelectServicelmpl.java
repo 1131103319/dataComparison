@@ -39,7 +39,7 @@ public class HiveSelectServicelmpl implements HiveSelectService {
         // 定义日期时间格式
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
         // 格式化当前时间
-        String formattedTime = localDateTime.format(formatter) + ":00:00";
+        String formattedTime = localDateTime.format(formatter) + ":02:00";
         return formattedTime;
     }
 
