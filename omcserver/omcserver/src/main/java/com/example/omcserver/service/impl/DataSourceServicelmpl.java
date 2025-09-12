@@ -220,7 +220,7 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public void get4Gmdn(String beforTime, String afterTime) {
+    public void get4Gmdn(String beforTime, String afterTime,String currentTime) {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when msisdn = '' or msisdn is null or msisdn = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_4glog_2c_log where partition_date >=? and  partition_date <=?;";
@@ -237,7 +237,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("4G手机号码填充率不足99%");
             alarm.setAlarmType("性能告警");
-            alarm.setEventTime(beforTime);
+            alarm.setEventTime(currentTime);
             alarm.setNeName("4G人网日志");
             alarm.setNeType("上网日志集中存储平台");
             alarm.setNeUID("lhsjrwrz");
@@ -273,7 +273,7 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public void get4Gsourceip(String beforTime, String afterTime) {
+    public void get4Gsourceip(String beforTime, String afterTime,String currentTime) {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_4glog_2c_log where partition_date >=? and  partition_date <=?;";
@@ -290,7 +290,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("4G源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
-            alarm.setEventTime(beforTime);
+            alarm.setEventTime(currentTime);
             alarm.setNeName("4G人网日志");
             alarm.setNeType("上网日志集中存储平台");
             alarm.setNeUID("lhsjrwrz");
@@ -326,7 +326,7 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public void get5Gmdn(String beforTime, String afterTime) {
+    public void get5Gmdn(String beforTime, String afterTime,String currentTime) {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when msisdn = '' or msisdn is null or msisdn = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_5gsalog_2c_log where partition_date >=? and  partition_date <=?;";
@@ -343,7 +343,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("5G手机号码填充率不足99%");
             alarm.setAlarmType("性能告警");
-            alarm.setEventTime(beforTime);
+            alarm.setEventTime(currentTime);
             alarm.setNeName("5G人网日志");
             alarm.setNeType("上网日志集中存储平台");
             alarm.setNeUID("lhwjrwrz");
@@ -379,7 +379,7 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public void get5Gsourceip(String beforTime, String afterTime) {
+    public void get5Gsourceip(String beforTime, String afterTime,String currentTime) {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_5gsalog_2c_log where partition_date >=? and  partition_date <=?;";
@@ -396,7 +396,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("5G源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
-            alarm.setEventTime(beforTime);
+            alarm.setEventTime(currentTime);
             alarm.setNeName("5G人网日志");
             alarm.setNeType("上网日志集中存储平台");
             alarm.setNeUID("lhwjrwrz");
@@ -432,7 +432,7 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public void getHomeaccount(String beforTime, String afterTime) {
+    public void getHomeaccount(String beforTime, String afterTime,String currentTime) {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when swzh = '' or swzh is null or swzh = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_homelog_log where partition_date >=? and  partition_date <=?;";
@@ -449,7 +449,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("家宽上网账号填充率不足99%");
             alarm.setAlarmType("性能告警");
-            alarm.setEventTime(beforTime);
+            alarm.setEventTime(currentTime);
             alarm.setNeName("家宽人网日志");
             alarm.setNeType("上网日志集中存储平台");
             alarm.setNeUID("lhjkrwrz");
@@ -485,7 +485,7 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public void getHomesourceip(String beforTime, String afterTime) {
+    public void getHomesourceip(String beforTime, String afterTime,String currentTime) {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when ygwipdz = '' or ygwipdz is null or ygwipdz = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_homelog_log where partition_date >=? and  partition_date <=?;";
@@ -502,7 +502,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("家宽源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
-            alarm.setEventTime(beforTime);
+            alarm.setEventTime(currentTime);
             alarm.setNeName("家宽人网日志");
             alarm.setNeType("上网日志集中存储平台");
             alarm.setNeUID("lhjkrwrz");
@@ -538,7 +538,7 @@ public class DataSourceServicelmpl implements DataSourceService {
     }
 
     @Override
-    public void getIdcsourceip(String beforTime, String afterTime) {
+    public void getIdcsourceip(String beforTime, String afterTime,String currentTime) {
         try {
             int maxId = getMaxId();
             String sql = "select round(sum(case when srcip = '' or srcip is null or srcip = 0  then 0 else 1 end )/count(1)*100,0) from mobile_db.orc_pv_log where partition_date >=? and  partition_date <=?;";
@@ -555,7 +555,7 @@ public class DataSourceServicelmpl implements DataSourceService {
             alarm.setAlarmStatus(1);
             alarm.setAlarmTitle("IDC源公网IP填充率不足99%");
             alarm.setAlarmType("性能告警");
-            alarm.setEventTime(beforTime);
+            alarm.setEventTime(currentTime);
             alarm.setNeName("IDC人网日志");
             alarm.setNeType("上网日志集中存储平台");
             alarm.setNeUID("lhidcrwrz");

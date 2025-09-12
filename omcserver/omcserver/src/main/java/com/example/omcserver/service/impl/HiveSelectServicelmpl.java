@@ -20,14 +20,15 @@ public class HiveSelectServicelmpl implements HiveSelectService {
         try {
             String beforTime = getBeforTime();
             String afterTime = getAfterTime();
-            log.info("start select 填充率,{}-{}", beforTime, afterTime);
-            dataSourceServicelmpl.get4Gmdn(beforTime, afterTime);
-            dataSourceServicelmpl.get4Gsourceip(beforTime, afterTime);
-            dataSourceServicelmpl.get5Gmdn(beforTime, afterTime);
-            dataSourceServicelmpl.get5Gsourceip(beforTime, afterTime);
-            dataSourceServicelmpl.getHomeaccount(beforTime, afterTime);
-            dataSourceServicelmpl.getHomesourceip(beforTime, afterTime);
-            dataSourceServicelmpl.getIdcsourceip(beforTime, afterTime);
+            String currentTime = getCurrentTime();
+            log.info("start select 填充率,{}-{}-{}", beforTime, afterTime, currentTime);
+            dataSourceServicelmpl.get4Gmdn(beforTime, afterTime,currentTime);
+            dataSourceServicelmpl.get4Gsourceip(beforTime, afterTime,currentTime);
+            dataSourceServicelmpl.get5Gmdn(beforTime, afterTime,currentTime);
+            dataSourceServicelmpl.get5Gsourceip(beforTime, afterTime,currentTime);
+            dataSourceServicelmpl.getHomeaccount(beforTime, afterTime,currentTime);
+            dataSourceServicelmpl.getHomesourceip(beforTime, afterTime,currentTime);
+            dataSourceServicelmpl.getIdcsourceip(beforTime, afterTime,currentTime);
         } catch (Exception e) {
             log.error("查询异常", e);
         }
@@ -40,6 +41,14 @@ public class HiveSelectServicelmpl implements HiveSelectService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
         // 格式化当前时间
         String formattedTime = localDateTime.format(formatter) + ":02:00";
+        return formattedTime;
+    }
+    public String getCurrentTime() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        // 定义日期时间格式
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+        // 格式化当前时间
+        String formattedTime = currentTime.format(formatter) + ":02:00";
         return formattedTime;
     }
 

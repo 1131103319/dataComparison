@@ -20,13 +20,13 @@ public interface DataSourceService {
     void updateFlowTime(String formatTime,String alarmSeq);
     //todo 重启恢复异常状态
     void updateErrorStatus();
-    void get4Gmdn(String startTime,String endTime);
-    void get4Gsourceip(String startTime,String endTime);
-    void get5Gmdn(String startTime,String endTime);
-    void get5Gsourceip(String startTime,String endTime);
-    void getHomeaccount(String startTime,String endTime);
-    void getHomesourceip(String startTime,String endTime);
-    void getIdcsourceip(String startTime,String endTime);
+    void get4Gmdn(String startTime,String endTime,String currentTime);
+    void get4Gsourceip(String startTime,String endTime,String currentTime);
+    void get5Gmdn(String startTime,String endTime,String currentTime);
+    void get5Gsourceip(String startTime,String endTime,String currentTime);
+    void getHomeaccount(String startTime,String endTime,String currentTime);
+    void getHomesourceip(String startTime,String endTime,String currentTime);
+    void getIdcsourceip(String startTime,String endTime,String currentTime);
     List<Integer> getAlarmSeq(String alarmTitle);
     void updateAlarmed(String bussiness,String alarmId);
     //todo 获取到业务当前最新状态 0清除，1告警
